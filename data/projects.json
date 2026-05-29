@@ -1,0 +1,1096 @@
+[
+  {
+    "title": "Meta Cube",
+    "slug": "meta-cube",
+    "description": "A Three.js WebGPU scene featuring a dynamic meta cube geometry with orbit controls and a background sprite layer.",
+    "youtubeUrl": "https://youtu.be/Xe_CFm10DdY",
+    "link": "/github-youtube/meta-cube/index.html",
+    "media": "meta-cube.png",
+    "createdAt": "2026-05-16",
+    "category": "webgpu",
+    "tags": [
+      "webgpu",
+      "geometry"
+    ]
+  },
+  {
+    "title": "Learn Three.js: Interactive Exploding Model",
+    "slug": "exploding-model",
+    "description": "Load a model, use vertex colors, apply a Shader Material, and add mouse interactivity \u2014 a four-part Three.js deep dive.",
+    "youtubeUrl": "https://youtu.be/rmNMltWCdjQ",
+    "link": "/github-youtube/exploding-model/index.html",
+    "media": "rad-grad.png",
+    "createdAt": "2026-05-10",
+    "category": "animation",
+    "tags": [
+      "model",
+      "shaders",
+      "interaction",
+      "vertex-colors"
+    ]
+  },
+  {
+    "title": "Shattered Rainbow",
+    "slug": "shattered-rainbow",
+    "description": "A generative art piece in Three.js \u2014 shattered geometry with rainbow color distributions.",
+    "youtubeUrl": "https://youtu.be/Q7soTiQ1IBk",
+    "link": "/github-youtube/shattered-rainbow/index.html",
+    "media": "",
+    "createdAt": "2026-04-23",
+    "category": "art",
+    "tags": [
+      "art",
+      "shaders",
+      "geometry"
+    ]
+  },
+  {
+    "title": "Three.js Earth",
+    "slug": "earth",
+    "description": "Build a high-fidelity Earth in Three.js: day + night textures, roughness, bump elevation, clouds, and a Fresnel atmosphere glow.",
+    "youtubeUrl": "https://youtu.be/FntV9iEJ0tU",
+    "link": "/github-youtube/earth/index.html",
+    "media": "",
+    "createdAt": "2026-04-20",
+    "category": "geometry",
+    "tags": [
+      "earth",
+      "pbr",
+      "atmosphere",
+      "textures"
+    ]
+  },
+  {
+    "title": "3D Globe with Three.js",
+    "slug": "3d-globe-with-threejs",
+    "description": "A simple Three.js app that renders an interactive 3D globe with country outlines from GeoJSON and a starfield background.",
+    "youtubeUrl": "https://youtu.be/f4zncVufL_I",
+    "link": "/github-youtube/3d-globe-with-threejs/index.html",
+    "media": "globe.png",
+    "createdAt": "2026-04-20",
+    "category": "geometry",
+    "tags": [
+      "globe",
+      "geojson",
+      "starfield"
+    ]
+  },
+  {
+    "title": "Three.js Interactive Vertex Earth",
+    "slug": "earth-vertices",
+    "description": "An interactive globe built with IcosahedronGeometry and custom vertex/fragment shaders for color, elevation, and alpha transparency.",
+    "youtubeUrl": "https://youtu.be/XaDQI1HmoOQ",
+    "link": "/github-youtube/earth-vertices/index.html",
+    "media": "",
+    "createdAt": "2026-03-23",
+    "category": "geometry",
+    "tags": [
+      "globe",
+      "shaders",
+      "vertices",
+      "starfield"
+    ]
+  },
+  {
+    "title": "Three.js + Matcap",
+    "slug": "matcap-threejs",
+    "description": "Matcaps are one of the easiest ways to get great-looking results in Three.js. Explore MeshMatcapNodeMaterial, HDR environments, and WebGPU rendering.",
+    "youtubeUrl": "https://youtu.be/KyrJxNSxHsE",
+    "link": "/github-youtube/matcap-threejs/index.html",
+    "media": "dragon.png",
+    "createdAt": "2026-03-20",
+    "category": "shaders",
+    "tags": [
+      "matcap",
+      "webgpu",
+      "pbr",
+      "hdr"
+    ]
+  },
+  {
+    "title": "3D Glowing Cubiverse",
+    "slug": "3D-cubiverse",
+    "description": "A WebGPU-powered Three.js scene featuring 2,000 glowing wireframe cubes scattered across a sphere, with bloom post-processing and interactive orbit controls.",
+    "youtubeUrl": "https://youtu.be/SYR5GOfHJGc",
+    "link": "/github-youtube/3D-cubiverse/index.html",
+    "media": "cubes.jpg",
+    "createdAt": "2026-03-04",
+    "category": "webgpu",
+    "tags": [
+      "webgpu",
+      "tsl",
+      "bloom",
+      "instancing"
+    ]
+  },
+  {
+    "title": "Stars Animation with Three.js and TSL",
+    "slug": "starfield-TSL",
+    "description": "Thousands of stars rendered with instancing; position and brightness randomized via range(), and the fly-through motion looped using mod() and time in TSL.",
+    "youtubeUrl": "",
+    "link": "/github-youtube/starfield-TSL/index.html",
+    "media": "stars-shot.png",
+    "createdAt": "2026-01-28",
+    "category": "webgpu",
+    "tags": [
+      "webgpu",
+      "tsl",
+      "instancing",
+      "starfield"
+    ]
+  },
+  {
+    "title": "Three.js + WebGPU Post-Processing Effects",
+    "slug": "post-processing",
+    "description": "Layer WebGPU post-processing passes step by step while sharpening asset loading, TSL operators, and animation fundamentals.",
+    "youtubeUrl": "https://youtu.be/KeJV_3LzXIA",
+    "link": "/github-youtube/post-processing/index.html",
+    "media": "post-shot.png",
+    "createdAt": "2026-01-13",
+    "category": "post-processing",
+    "tags": [
+      "webgpu",
+      "tsl",
+      "post-processing"
+    ]
+  },
+  {
+    "title": "Simple TSL Particles",
+    "slug": "simple-TSL-particles",
+    "description": "A WebGPU particle system written in TSL, using instancing and a background sprite layer.",
+    "youtubeUrl": "https://youtu.be/XUtIzRkaQOE",
+    "link": "/github-youtube/simple-TSL-particles/index.html",
+    "media": "torus-knot.png",
+    "createdAt": "2026-01-12",
+    "category": "webgpu",
+    "tags": [
+      "webgpu",
+      "tsl",
+      "particles",
+      "instancing"
+    ]
+  },
+  {
+    "title": "Shapes with TSL",
+    "slug": "shapes-TSL",
+    "description": "Exploring 2D signed-distance shapes drawn entirely in TSL on a Three.js WebGPU renderer.",
+    "youtubeUrl": "https://youtu.be/9GTvWZMIeCc",
+    "link": "/github-youtube/shapes-TSL/index.html",
+    "media": "torus-knot.png",
+    "createdAt": "2026-01-12",
+    "category": "webgpu",
+    "tags": [
+      "webgpu",
+      "tsl",
+      "geometry",
+      "sdf"
+    ]
+  },
+  {
+    "title": "Three.js Project: Your Hand = Controller",
+    "slug": "physics-gestures",
+    "description": "Webcam hand tracking + Rapier physics in the browser. Wire up MediaPipe, organize modules, and stitch it all together with clean JavaScript.",
+    "youtubeUrl": "https://youtu.be/9Bzmgf5Gpr0",
+    "link": "/github-youtube/physics-gestures/index.html",
+    "media": "gestures-shot.png",
+    "createdAt": "2026-01-01",
+    "category": "physics",
+    "tags": [
+      "physics",
+      "mediapipe",
+      "hand-tracking",
+      "rapier"
+    ]
+  },
+  {
+    "title": "Mocap Animation",
+    "slug": "mocap-animation",
+    "description": "Motion capture animation playback in Three.js.",
+    "youtubeUrl": "https://youtu.be/Qzy6cQN6aqw",
+    "link": "/github-youtube/mocap-animation/index.html",
+    "media": "",
+    "createdAt": "2025-12-03",
+    "category": "animation",
+    "tags": [
+      "mocap",
+      "animation",
+      "model"
+    ]
+  },
+  {
+    "title": "Code Art with Sprites in THREE.js",
+    "slug": "code-art-sprites",
+    "description": "Generative code art using Three.js sprites, inspired by Joshua Davis.",
+    "youtubeUrl": "https://youtu.be/vFqpFVcswcs",
+    "link": "/github-youtube/code-art-sprites/index.html",
+    "media": "",
+    "createdAt": "2025-11-30",
+    "category": "art",
+    "tags": [
+      "sprites",
+      "art",
+      "generative"
+    ]
+  },
+  {
+    "title": "Curl Noise Particles",
+    "slug": "curl-particles",
+    "description": "Particle simulation driven by curl noise derived from Perlin noise, creating swirling organic flow fields.",
+    "youtubeUrl": "https://youtu.be/w2ljEVh3i5w",
+    "link": "/github-youtube/curl-particles/index.html",
+    "media": "",
+    "createdAt": "2025-11-30",
+    "category": "particles",
+    "tags": [
+      "particles",
+      "noise",
+      "curl-noise"
+    ]
+  },
+  {
+    "title": "Masking Effect",
+    "slug": "masking-effect",
+    "description": "A Three.js WebGPU scene demonstrating stencil-based masking techniques with orbit controls.",
+    "youtubeUrl": "https://youtu.be/uKTc0296znQ",
+    "link": "/github-youtube/masking-effect/index.html",
+    "media": "",
+    "createdAt": "2025-11-30",
+    "category": "post-processing",
+    "tags": [
+      "masking",
+      "webgpu",
+      "stencil"
+    ]
+  },
+  {
+    "title": "Learn Three.js: Simple Particle System",
+    "slug": "simple-particle-effects",
+    "description": "Three simple, easy-to-create particle effects \u2014 Fire, Smoke, and Sparkles \u2014 built with Three.js.",
+    "youtubeUrl": "https://youtu.be/h1UQdbuF204",
+    "link": "/github-youtube/simple-particle-effects/index.html",
+    "media": "",
+    "createdAt": "2025-11-30",
+    "category": "particles",
+    "tags": [
+      "particles",
+      "fire",
+      "smoke",
+      "beginners"
+    ]
+  },
+  {
+    "title": "Creative Coding with Three.js \u2014 Grids!",
+    "slug": "grids-greative-coding",
+    "description": "Block out a Joshua-Davis-style grid in Three.js, swap bold color palettes, and sprinkle in GTAO post-processing for delicious depth.",
+    "youtubeUrl": "https://youtu.be/7qbyH7-mfV0",
+    "link": "/github-youtube/grids-greative-coding/index.html",
+    "media": "grid-shot.png",
+    "createdAt": "2025-11-11",
+    "category": "art",
+    "tags": [
+      "art",
+      "grids",
+      "gtao",
+      "post-processing"
+    ]
+  },
+  {
+    "title": "Adding Physics to Three.js with Rapier",
+    "slug": "physics-rapier",
+    "description": "Physics engines add dynamic, fun interaction to games and animations. Rapier is a fast, stable engine built with Rust that works seamlessly with Three.js.",
+    "youtubeUrl": "https://youtu.be/agNZuqehHtg",
+    "link": "/github-youtube/physics-rapier/index.html",
+    "media": "",
+    "createdAt": "2025-11-01",
+    "category": "physics",
+    "tags": [
+      "physics",
+      "rapier"
+    ]
+  },
+  {
+    "title": "Computer Vision with JavaScript",
+    "slug": "computer-vision",
+    "description": "Hand landmark detection in the browser using MediaPipe, wired into a Three.js scene.",
+    "youtubeUrl": "https://youtu.be/WkHqgt2dPlg",
+    "link": "/github-youtube/computer-vision/index.html",
+    "media": "",
+    "createdAt": "2025-10-09",
+    "category": "other",
+    "tags": [
+      "mediapipe",
+      "hand-tracking",
+      "computer-vision"
+    ]
+  },
+  {
+    "title": "Physics Grid",
+    "slug": "physics-grid",
+    "description": "A grid of physics-simulated objects using Rapier and Three.js.",
+    "youtubeUrl": "https://youtu.be/9z5OdV4V2oM",
+    "link": "/github-youtube/physics-grid/index.html",
+    "media": "",
+    "createdAt": "2025-10-08",
+    "category": "physics",
+    "tags": [
+      "physics",
+      "grid",
+      "rapier"
+    ]
+  },
+  {
+    "title": "Three.js WebGPU Template",
+    "slug": "threejs-webgpu-template",
+    "description": "A minimal Three.js WebGPU starter: torus knot, orbit controls, hemisphere lighting, and a background sprite layer.",
+    "youtubeUrl": "https://youtu.be/T6A-K9uLdIU",
+    "link": "/github-youtube/threejs-webgpu-template/index.html",
+    "media": "torus-knot.png",
+    "createdAt": "2025-10-04",
+    "category": "webgpu",
+    "tags": [
+      "webgpu",
+      "template"
+    ]
+  },
+  {
+    "title": "Animated Line Art With Three.js",
+    "slug": "animated-line-art",
+    "description": "Explore the MeshLine add-on to create animated creative coding art \u2014 a beginner-to-intermediate Three.js tutorial.",
+    "youtubeUrl": "https://youtu.be/KIMsUG-MQTo",
+    "link": "/github-youtube/animated-line-art/index.html",
+    "media": "",
+    "createdAt": "2025-10-01",
+    "category": "animation",
+    "tags": [
+      "meshline",
+      "art",
+      "animation"
+    ]
+  },
+  {
+    "title": "Three.js Tutorial: Painting with Decals",
+    "slug": "painting-with-decals",
+    "description": "Paint directly onto 3D models with decals in Three.js using raycasting, textures, and decal geometry to place colorful brush strokes on an OBJ model.",
+    "youtubeUrl": "https://youtu.be/U-49rfq1dsw",
+    "link": "/github-youtube/painting-with-decals/index.html",
+    "media": "decals-shot.png",
+    "createdAt": "2025-09-26",
+    "category": "art",
+    "tags": [
+      "decals",
+      "raycasting",
+      "textures",
+      "interaction"
+    ]
+  },
+  {
+    "title": "Three.js Tutorial: How to Load a Model",
+    "slug": "load-a-gltf-model",
+    "description": "Load a GLTF astronaut model with HDR environment mapping, a custom starfield, and gradient sprite backgrounds.",
+    "youtubeUrl": "https://youtu.be/ylyLefnMc1c",
+    "link": "/github-youtube/load-a-gltf-model/index.html",
+    "media": "",
+    "createdAt": "2025-09-21",
+    "category": "getting-started",
+    "tags": [
+      "gltf",
+      "model",
+      "hdr",
+      "starfield"
+    ]
+  },
+  {
+    "title": "Three.js Project: Creative Coding Composition",
+    "slug": "creative-composition",
+    "description": "Build a dynamic 3D composition in Three.js, exploring creative ways to arrange elements using drag controls and sprites.",
+    "youtubeUrl": "https://youtu.be/vXjnbu1f7Cs",
+    "link": "/github-youtube/creative-composition/index.html",
+    "media": "comp.jpg",
+    "createdAt": "2025-09-11",
+    "category": "art",
+    "tags": [
+      "composition",
+      "art",
+      "sprites",
+      "drag-controls"
+    ]
+  },
+  {
+    "title": "Learn Three.js Basics",
+    "slug": "learn-threejs-basics",
+    "description": "A course companion covering the essentials: geometry, textures, lighting, and interactivity through hands-on creative coding projects.",
+    "youtubeUrl": "https://www.youtube.com/playlist?list=PLb9_Nx5huIwk5iNT9srPsWRGbp6RKnoVJ",
+    "link": "/github-youtube/learn-threejs-basics/index.html",
+    "media": "L3JSB.jpg",
+    "createdAt": "2025-09-08",
+    "category": "getting-started",
+    "tags": [
+      "beginners",
+      "course",
+      "geometry",
+      "textures"
+    ]
+  },
+  {
+    "title": "Crystal Branching Art THREE.js",
+    "slug": "crystal-branching",
+    "description": "Generative crystal-branching geometry rendered in Three.js.",
+    "youtubeUrl": "https://www.youtube.com/watch?v=fvymtcRlsDU",
+    "link": "/github-youtube/crystal-branching/index.html",
+    "media": "",
+    "createdAt": "2025-07-12",
+    "category": "art",
+    "tags": [
+      "art",
+      "geometry",
+      "generative"
+    ]
+  },
+  {
+    "title": "Three.js: Interactive Cube Surface",
+    "slug": "cube-surface",
+    "description": "Learn about Three.js raycasting, lights with shadows, and subsurface shading while building a dazzling interactive art surface.",
+    "youtubeUrl": "https://youtu.be/rmVDXZywIA4",
+    "link": "/github-youtube/cube-surface/index.html",
+    "media": "",
+    "createdAt": "2025-07-12",
+    "category": "geometry",
+    "tags": [
+      "raycasting",
+      "shadows",
+      "subsurface-scattering",
+      "interactive"
+    ]
+  },
+  {
+    "title": "Learn Three.js: Dynamic 3D Art",
+    "slug": "dynamic-3d-art",
+    "description": "A clearly explained Three.js tutorial exploring MeshToonMaterial, a Bokeh post-processing effect, and the math for radial positioning and animation.",
+    "youtubeUrl": "https://youtu.be/yCWmaI5E5ZI",
+    "link": "/github-youtube/dynamic-3d-art/index.html",
+    "media": "",
+    "createdAt": "2025-07-12",
+    "category": "art",
+    "tags": [
+      "toon",
+      "bokeh",
+      "post-processing",
+      "animation"
+    ]
+  },
+  {
+    "title": "Fireflies",
+    "slug": "fireflies",
+    "description": "Glowing firefly particles drifting through a Three.js scene.",
+    "youtubeUrl": "https://youtu.be/1sXqcs7F7g0",
+    "link": "/github-youtube/fireflies/index.html",
+    "media": "",
+    "createdAt": "2025-07-12",
+    "category": "particles",
+    "tags": [
+      "particles",
+      "animation",
+      "glow"
+    ]
+  },
+  {
+    "title": "Random Art",
+    "slug": "random-art",
+    "description": "Procedurally generated random art compositions built with Three.js.",
+    "youtubeUrl": "https://youtu.be/tt8qKQzqV_o",
+    "link": "/github-youtube/random-art/index.html",
+    "media": "",
+    "createdAt": "2025-07-12",
+    "category": "art",
+    "tags": [
+      "art",
+      "procedural",
+      "generative"
+    ]
+  },
+  {
+    "title": "Three.js + Rapier Physics = Liquid Glass Effect",
+    "slug": "physics-liquid-glass",
+    "description": "A liquid glass simulation using Three.js, Rapier physics, and the Marching Cubes algorithm \u2014 metaballs glide and morph in real-time, reacting to mouse movement.",
+    "youtubeUrl": "https://youtu.be/7Kt6WCTgzHI",
+    "link": "/github-youtube/physics-liquid-glass/index.html",
+    "media": "glass-shot.png",
+    "createdAt": "2025-07-01",
+    "category": "physics",
+    "tags": [
+      "physics",
+      "rapier",
+      "marching-cubes",
+      "metaballs",
+      "refraction"
+    ]
+  },
+  {
+    "title": "Three.js Project: Realistic Rendering",
+    "slug": "realistic-rendering-00",
+    "description": "A teapot model rendered with physically based (PBR) materials and an HDR environment, featuring real-time reflections, refractions, and orbit controls.",
+    "youtubeUrl": "https://youtu.be/teKjrG4TqrI",
+    "link": "/github-youtube/realistic-rendering-00/index.html",
+    "media": "",
+    "createdAt": "2025-06-24",
+    "category": "shaders",
+    "tags": [
+      "pbr",
+      "hdr",
+      "reflections",
+      "refractions"
+    ]
+  },
+  {
+    "title": "Swirling Rainbows with Three.js",
+    "slug": "swirling-rainbows",
+    "description": "Vibrant, swirling rainbow color animations rendered in Three.js.",
+    "youtubeUrl": "https://www.youtube.com/watch?v=hTH2Tpd0ORk",
+    "link": "/github-youtube/swirling-rainbows/index.html",
+    "media": "",
+    "createdAt": "2025-06-02",
+    "category": "art",
+    "tags": [
+      "art",
+      "animation",
+      "shaders"
+    ]
+  },
+  {
+    "title": "Physics Coins",
+    "slug": "physics-coins",
+    "description": "Physically simulated coins tumbling and stacking using Rapier and Three.js.",
+    "youtubeUrl": "https://youtu.be/zbxruD0zUnw",
+    "link": "/github-youtube/physics-coins/index.html",
+    "media": "",
+    "createdAt": "2025-05-31",
+    "category": "physics",
+    "tags": [
+      "physics",
+      "rapier",
+      "coins"
+    ]
+  },
+  {
+    "title": "Wormhole Effect",
+    "slug": "wormhole-effect",
+    "description": "A trippy wormhole fly-through effect built in Three.js.",
+    "youtubeUrl": "https://www.youtube.com/watch?v=Il_GKGFggWY",
+    "link": "/github-youtube/wormhole-effect/index.html",
+    "media": "",
+    "createdAt": "2025-05-31",
+    "category": "animation",
+    "tags": [
+      "wormhole",
+      "animation",
+      "geometry"
+    ]
+  },
+  {
+    "title": "Kaleidoscope",
+    "slug": "kaleidoscope",
+    "description": "A kaleidoscope effect in Three.js using mirrored geometry and post-processing.",
+    "youtubeUrl": "https://www.youtube.com/watch?v=Nw9Vaeqcpag",
+    "link": "/github-youtube/kaleidoscope/index.html",
+    "media": "",
+    "createdAt": "2025-05-19",
+    "category": "art",
+    "tags": [
+      "art",
+      "post-processing",
+      "mirroring"
+    ]
+  },
+  {
+    "title": "Three.js Project: Animated Text",
+    "slug": "animated-text-effects",
+    "description": "A dynamic, interactive 3D text animation with a glass material and animated dashed outline effect.",
+    "youtubeUrl": "https://youtu.be/a7qmBRAXqCY",
+    "link": "/github-youtube/animated-text-effects/index.html",
+    "media": "",
+    "createdAt": "2025-04-21",
+    "category": "animation",
+    "tags": [
+      "text",
+      "animation",
+      "outline",
+      "glass"
+    ]
+  },
+  {
+    "title": "Getting Started Coding Art with Three.js",
+    "slug": "getting-started-threejs",
+    "description": "Build a Three.js scene and animate position and rotation of objects, covering Vector3 methods, key listeners, and OrbitControls.",
+    "youtubeUrl": "https://youtu.be/b78_tqkBuLM",
+    "link": "/github-youtube/getting-started-threejs/index.html",
+    "media": "rad-grad.png",
+    "createdAt": "2025-04-21",
+    "category": "getting-started",
+    "tags": [
+      "beginners",
+      "animation",
+      "orbit-controls"
+    ]
+  },
+  {
+    "title": "Three.js Game Dev Project: Wormhole Blaster",
+    "slug": "flythru-wireframe-wormhole",
+    "description": "Building on a fly-through scene, add blasters with collision detection using raycasting, vector math, and mouse events.",
+    "youtubeUrl": "https://youtu.be/w_ku0HjutZI",
+    "link": "/github-youtube/flythru-wireframe-wormhole/index.html",
+    "media": "circle.png",
+    "createdAt": "2025-04-07",
+    "category": "other",
+    "tags": [
+      "game",
+      "raycasting",
+      "wireframe",
+      "wormhole"
+    ]
+  },
+  {
+    "title": "Three.js Creative Coding: Refracting Noise",
+    "slug": "refracting-noise",
+    "description": "A visually opulent 3D scene with a GLSL shader-driven background, randomly positioned transparent spheres and boxes, and dynamic animations.",
+    "youtubeUrl": "https://www.youtube.com/watch?v=JJkRq_NZHgc",
+    "link": "/github-youtube/refracting-noise/index.html",
+    "media": "",
+    "createdAt": "2025-01-28",
+    "category": "shaders",
+    "tags": [
+      "shaders",
+      "refraction",
+      "noise",
+      "transparency"
+    ]
+  },
+  {
+    "title": "THREE.js Tutorial: Scroll Animation",
+    "slug": "scroll-animation",
+    "description": "Smooth animation triggered by scrolling \u2014 an OBJ model with a matcap material, starfield background, and gradient sprite layer.",
+    "youtubeUrl": "https://youtu.be/1qpeo5ewz_8",
+    "link": "/github-youtube/scroll-animation/index.html",
+    "media": "",
+    "createdAt": "2024-12-28",
+    "category": "animation",
+    "tags": [
+      "scroll",
+      "animation",
+      "matcap"
+    ]
+  },
+  {
+    "title": "Three.js Roadmap for Beginners",
+    "slug": "threejs-roadmap",
+    "description": "A playground scene covering the key techniques and ideas from the Three.js beginner's roadmap.",
+    "youtubeUrl": "https://youtu.be/M7ARBA3EcZI",
+    "link": "/github-youtube/threejs-roadmap/index.html",
+    "media": "",
+    "createdAt": "2024-12-10",
+    "category": "getting-started",
+    "tags": [
+      "beginners",
+      "roadmap"
+    ]
+  },
+  {
+    "title": "Pretty Polygons",
+    "slug": "pretty-polygons",
+    "description": "Low-poly geometric shapes arranged into a pleasing procedural composition in Three.js.",
+    "youtubeUrl": "https://youtu.be/D6oyccQHRbA",
+    "link": "/github-youtube/pretty-polygons/index.html",
+    "media": "",
+    "createdAt": "2024-11-25",
+    "category": "art",
+    "tags": [
+      "geometry",
+      "art",
+      "low-poly"
+    ]
+  },
+  {
+    "title": "Noise Grid",
+    "slug": "noise-grid",
+    "description": "A grid of geometry displaced and animated by noise functions in Three.js.",
+    "youtubeUrl": "https://youtu.be/w2ljEVh3i5w",
+    "link": "/github-youtube/noise-grid/index.html",
+    "media": "circle.png",
+    "createdAt": "2024-11-12",
+    "category": "art",
+    "tags": [
+      "noise",
+      "grid",
+      "art",
+      "animation"
+    ]
+  },
+  {
+    "title": "Spinning Neon Cubes",
+    "slug": "spinning-neon-cubes",
+    "description": "Multiple rotating boxes rendered in Three.js with a bloom post-processing effect for a neon glow look.",
+    "youtubeUrl": "https://youtu.be/TmCx6b6Ni8Y",
+    "link": "/github-youtube/spinning-neon-cubes/index.html",
+    "media": "",
+    "createdAt": "2024-10-19",
+    "category": "animation",
+    "tags": [
+      "animation",
+      "bloom",
+      "post-processing"
+    ]
+  },
+  {
+    "title": "Create a Video Game in Three.js",
+    "slug": "simple-game-1",
+    "description": "Recreate 'Computer Space,' the first arcade video game, in Three.js \u2014 a journey back to the dawn of arcade gaming.",
+    "youtubeUrl": "https://youtu.be/wuiOMMAPb4s",
+    "link": "/github-youtube/simple-game-1/index.html",
+    "media": "",
+    "createdAt": "2024-10-09",
+    "category": "other",
+    "tags": [
+      "game",
+      "arcade"
+    ]
+  },
+  {
+    "title": "Transition Effect in THREE.js",
+    "slug": "transition-effect",
+    "description": "A scene crossfade transition effect in Three.js, based on Fernando Serrano's classic cross-fade post-processing example.",
+    "youtubeUrl": "https://youtu.be/gsz3dgT-g3Q",
+    "link": "/github-youtube/transition-effect/index.html",
+    "media": "",
+    "createdAt": "2024-09-22",
+    "category": "animation",
+    "tags": [
+      "transition",
+      "animation",
+      "post-processing"
+    ]
+  },
+  {
+    "title": "Satisfying Physics with Three.js: Dynamic Dice",
+    "slug": "physics-with-dice",
+    "description": "Roll hundreds of dice using Rapier physics and Three.js \u2014 satisfying, dynamic, and surprisingly addictive.",
+    "youtubeUrl": "https://youtu.be/SNPKwVBY5Tk",
+    "link": "/github-youtube/physics-with-dice/index.html",
+    "media": "",
+    "createdAt": "2024-09-17",
+    "category": "physics",
+    "tags": [
+      "physics",
+      "rapier",
+      "dice"
+    ]
+  },
+  {
+    "title": "Three.js Tutorial: Fragmented Sculpture Art",
+    "slug": "frag-sculture-art",
+    "description": "Load a 3D model, apply a MatCap material, and add a cool refracting lens effect with Mesh Physical Material.",
+    "youtubeUrl": "https://youtu.be/j2jl6jFjFRQ",
+    "link": "/github-youtube/frag-sculture-art/index.html",
+    "media": "",
+    "createdAt": "2024-08-30",
+    "category": "art",
+    "tags": [
+      "model",
+      "matcap",
+      "refraction"
+    ]
+  },
+  {
+    "title": "Learn Three.js: Metaballs with Physics",
+    "slug": "metaball-physics",
+    "description": "Mesmerizing metaballs in Three.js powered by Rapier physics \u2014 great as a hero feature or a standalone experiment.",
+    "youtubeUrl": "https://youtu.be/jPbOKwXqdn8",
+    "link": "/github-youtube/metaball-physics/index.html",
+    "media": "",
+    "createdAt": "2024-08-30",
+    "category": "physics",
+    "tags": [
+      "metaballs",
+      "physics",
+      "rapier"
+    ]
+  },
+  {
+    "title": "Sci-Fi Flight",
+    "slug": "scifi-flight",
+    "description": "A Three.js basics tutorial: set up a scene, create primitive objects, and animate them to create a cool sci-fi flight effect.",
+    "youtubeUrl": "https://youtu.be/BQ-ML0ewaGU",
+    "link": "/github-youtube/scifi-flight/index.html",
+    "media": "",
+    "createdAt": "2024-08-25",
+    "category": "animation",
+    "tags": [
+      "animation",
+      "beginner",
+      "geometry"
+    ]
+  },
+  {
+    "title": "Build the Solar System with Three.js",
+    "slug": "solar-system",
+    "description": "Sculpt the Sun, planets, and stars in Three.js \u2014 not as they are in the cold void of space, but as they bloom in the imagination.",
+    "youtubeUrl": "https://youtu.be/5Wj3TnktlGc",
+    "link": "/github-youtube/solar-system/index.html",
+    "media": "",
+    "createdAt": "2024-08-30",
+    "category": "animation",
+    "tags": [
+      "solar-system",
+      "animation",
+      "geometry"
+    ]
+  },
+  {
+    "title": "Subsurface Scattering Material Play",
+    "slug": "subscurface-scattering-play",
+    "description": "Exploring subsurface scattering in Three.js \u2014 soft, skin-like materials that let light bleed through.",
+    "youtubeUrl": "https://youtu.be/O8T5Ef8KVas",
+    "link": "/github-youtube/subscurface-scattering-play/index.html",
+    "media": "",
+    "createdAt": "2024-08-30",
+    "category": "shaders",
+    "tags": [
+      "subsurface-scattering",
+      "materials",
+      "pbr"
+    ]
+  },
+  {
+    "title": "Three.js Painting Effects",
+    "slug": "painting-effects",
+    "description": "Explore painting with the mouse to create unique interactive 3D effects in Three.js.",
+    "youtubeUrl": "https://youtu.be/RfGhvUeZNXE",
+    "link": "/github-youtube/painting-effects/index.html",
+    "media": "",
+    "createdAt": "2024-06-21",
+    "category": "art",
+    "tags": [
+      "painting",
+      "interaction",
+      "mouse"
+    ]
+  },
+  {
+    "title": "React-Three-Fiber + Vite",
+    "slug": "R3F-plus-vite",
+    "description": "A minimal React-Three-Fiber + Vite starter with HMR and ESLint, ready to build on.",
+    "youtubeUrl": "https://youtu.be/WzXwuQ95iQw",
+    "link": "/github-youtube/R3F-plus-vite/index.html",
+    "media": "",
+    "createdAt": "2024-06-07",
+    "category": "other",
+    "tags": [
+      "react",
+      "r3f",
+      "vite"
+    ]
+  },
+  {
+    "title": "Loading a Model with THREE.js",
+    "slug": "loading-a-model",
+    "description": "A concise tutorial on loading and displaying a 3D model in Three.js.",
+    "youtubeUrl": "https://youtu.be/Cxd2gYRrz4c",
+    "link": "/github-youtube/loading-a-model/index.html",
+    "media": "rad-grad.png",
+    "createdAt": "2024-06-06",
+    "category": "getting-started",
+    "tags": [
+      "model",
+      "loading",
+      "beginners"
+    ]
+  },
+  {
+    "title": "Learn Three.js: Explode Transition",
+    "slug": "explode-transition",
+    "description": "An explosive 3D effect in Three.js \u2014 make your scene transitions pop.",
+    "youtubeUrl": "https://youtu.be/Ve4Q5hrIVUg",
+    "link": "/github-youtube/explode-transition/index.html",
+    "media": "",
+    "createdAt": "2024-05-28",
+    "category": "animation",
+    "tags": [
+      "transition",
+      "animation",
+      "particles"
+    ]
+  },
+  {
+    "title": "Three.js Project for Beginners: Add the Moon",
+    "slug": "add-the-moon",
+    "description": "A beginner-friendly project: add the Moon to an Earth scene in Three.js and create a majestic masterpiece.",
+    "youtubeUrl": "https://youtu.be/Bd3I_cHZyGo",
+    "link": "/github-youtube/add-the-moon/index.html",
+    "media": "",
+    "createdAt": "2024-05-21",
+    "category": "getting-started",
+    "tags": [
+      "beginners",
+      "moon",
+      "earth"
+    ]
+  },
+  {
+    "title": "Three.js Tips and Techniques",
+    "slug": "tips-and-techniques",
+    "description": "10 favorite tips and techniques for Three.js \u2014 quick code snippets covering screenshots, post-processing, fog, outlines, transparent backgrounds, and more.",
+    "youtubeUrl": "https://youtu.be/wrp17rdc4dU",
+    "link": "/github-youtube/tips-and-techniques/index.html",
+    "media": "rad-grad.png",
+    "createdAt": "2024-05-14",
+    "category": "other",
+    "tags": [
+      "tips",
+      "techniques",
+      "post-processing"
+    ]
+  },
+  {
+    "title": "Learn Three.js: Spirograph Art",
+    "slug": "spirograph-art",
+    "description": "Beautiful animated spirograph art using Three.js CanvasTexture \u2014 draw patterns on a canvas and apply them to 3D planes.",
+    "youtubeUrl": "https://youtu.be/1Ww5BtQ8JlQ",
+    "link": "/github-youtube/spirograph-art/index.html",
+    "media": "",
+    "createdAt": "2024-05-07",
+    "category": "art",
+    "tags": [
+      "art",
+      "canvas-texture",
+      "animation"
+    ]
+  },
+  {
+    "title": "Simple Game 2",
+    "slug": "simple-game-2",
+    "description": "A second Three.js game project building on the mechanics introduced in Simple Game 1.",
+    "youtubeUrl": "https://youtu.be/wuiOMMAPb4s",
+    "link": "/github-youtube/simple-game-2/index.html",
+    "media": "",
+    "createdAt": "2024-04-05",
+    "category": "other",
+    "tags": [
+      "game"
+    ]
+  },
+  {
+    "title": "Animation with Three.js and Tween.js",
+    "slug": "three-plus-tween",
+    "description": "Dive into smooth, interpolated animation with Three.js and Tween.js \u2014 tools and techniques to take your creations to the next level.",
+    "youtubeUrl": "https://youtu.be/xH98Hb1rMhE",
+    "link": "/github-youtube/three-plus-tween/index.html",
+    "media": "rad-grad.png",
+    "createdAt": "2024-04-04",
+    "category": "animation",
+    "tags": [
+      "animation",
+      "tween"
+    ]
+  },
+  {
+    "title": "3D Mandala Maker",
+    "slug": "mandala-maker",
+    "description": "Create intricate mandalas using InstancedMesh, Matrix4, and a random number generator \u2014 turning math into math-magic.",
+    "youtubeUrl": "https://www.youtube.com/watch?v=1kxmeeUSCh8",
+    "link": "/github-youtube/mandala-maker/index.html",
+    "media": "black-n-shiney2.jpg",
+    "createdAt": "2024-03-21",
+    "category": "art",
+    "tags": [
+      "instanced-mesh",
+      "art",
+      "procedural"
+    ]
+  },
+  {
+    "title": "Animated Starfield",
+    "slug": "animated-starfield",
+    "description": "An animated particle starfield flying through space, built with Three.js.",
+    "youtubeUrl": "https://youtu.be/1j6aCk2gOqs",
+    "link": "/github-youtube/animated-starfield/index.html",
+    "media": "",
+    "createdAt": "2023-04-06",
+    "category": "particles",
+    "tags": [
+      "starfield",
+      "particles",
+      "animation"
+    ]
+  },
+  {
+    "title": "Getting Started with Shaders in Three.js",
+    "slug": "getting-started-shaders",
+    "description": "An introduction to GLSL vertex and fragment shaders in Three.js \u2014 your first step into custom rendering.",
+    "youtubeUrl": "https://youtu.be/gweQSqT66d4",
+    "link": "/github-youtube/getting-started-shaders/index.html",
+    "media": "",
+    "createdAt": "2023-02-19",
+    "category": "getting-started",
+    "tags": [
+      "shaders",
+      "glsl",
+      "beginners"
+    ]
+  },
+  {
+    "title": "Noisy Geometry",
+    "slug": "noisy-geometry",
+    "description": "Geometry displaced and animated by noise \u2014 an early Three.js experiment.",
+    "youtubeUrl": "https://youtu.be/QX-3-H-2Aq4",
+    "link": "/github-youtube/noisy-geometry/index.html",
+    "media": "",
+    "createdAt": "2022-10-05",
+    "category": "geometry",
+    "tags": [
+      "noise",
+      "geometry"
+    ]
+  },
+  {
+    "title": "Orbit Trails",
+    "slug": "orbit-trails",
+    "description": "Glowing orbital trail lines following objects moving along circular paths in Three.js.",
+    "youtubeUrl": "https://youtu.be/zuBVpg6TX38",
+    "link": "/github-youtube/orbit-trails/index.html",
+    "media": "",
+    "createdAt": "2022-01-01",
+    "category": "animation",
+    "tags": [
+      "orbit",
+      "trails",
+      "animation"
+    ]
+  },
+  {
+    "title": "Noisy Points",
+    "slug": "noisy-points",
+    "description": "A point cloud animated by noise functions \u2014 an early Three.js exploration.",
+    "youtubeUrl": "https://youtu.be/rrUqNAjmwCY",
+    "link": "/github-youtube/noisy-points/index.html",
+    "media": "",
+    "createdAt": "2021-04-14",
+    "category": "particles",
+    "tags": [
+      "noise",
+      "particles",
+      "points"
+    ]
+  },
+  {
+    "title": "Particle Geometry",
+    "slug": "particle-geo-00",
+    "description": "Particles distributed across 3D geometry \u2014 an early Three.js particle experiment.",
+    "youtubeUrl": "xxx",
+    "link": "/github-youtube/particle-geo-00/index.html",
+    "media": "",
+    "createdAt": "2021-04-14",
+    "category": "particles",
+    "tags": [
+      "particles",
+      "geometry"
+    ]
+  }
+]

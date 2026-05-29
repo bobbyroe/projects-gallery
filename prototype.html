@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Projects · Bobby Roe</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0b0b0c; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+    #__bundler_loading { position: fixed; bottom: 20px; right: 20px; font: 13px/1.4 -apple-system, BlinkMacSystemFont, sans-serif; color: #666; background: #fff; padding: 8px 14px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.12); z-index: 10000; }
+    #__bundler_thumbnail { position: fixed; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #0b0b0c; z-index: 9999; }
+    #__bundler_thumbnail svg { width: 100%; height: 100%; object-fit: contain; }
+    #__bundler_placeholder { color: #999; font-size: 14px; }
+  </style>
+  <noscript>
+    <style>#__bundler_loading { display: none; }</style>
+    <div style="position:fixed;bottom:12px;left:12px;font:13px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#999;background:rgba(255,255,255,0.9);padding:6px 12px;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,0.08);z-index:10000;">
+      This page requires JavaScript to display.
+    </div>
+  </noscript>
+</head>
+<body>
+  <div id="__bundler_thumbnail">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0b0b0c"></rect>
+    <!-- masonry tile silhouette -->
+    <g fill="#1a1a1d" stroke="#2e2e34" stroke-width="2">
+      <rect x="180" y="180" width="190" height="230" rx="10"></rect>
+      <rect x="400" y="180" width="190" height="170" rx="10"></rect>
+      <rect x="620" y="180" width="190" height="260" rx="10"></rect>
+      <rect x="840" y="180" width="190" height="200" rx="10"></rect>
+      <rect x="180" y="440" width="190" height="180" rx="10"></rect>
+      <rect x="400" y="380" width="190" height="240" rx="10"></rect>
+      <rect x="620" y="470" width="190" height="150" rx="10"></rect>
+      <rect x="840" y="410" width="190" height="210" rx="10"></rect>
+    </g>
+    <!-- play glyph centered -->
+    <circle cx="600" cy="400" r="54" fill="#ffffff"></circle>
+    <polygon points="584,372 584,428 628,400" fill="#0b0b0c"></polygon>
+  </svg>
+</div>
+  <div id="__bundler_loading">Unpacking...</div>
+
+  <script>
+    
+document.addEventListener('DOMContentLoaded', async function() {
+  const loading = document.getElementById('__bundler_loading');
+  function setStatus(msg) { if (loading) loading.textContent = msg; }
+
+  // Error sink persists across replaceWith since it's on window, not the DOM.
+  window.addEventListener('error', function(e) {
+    var p = document.body || document.documentElement;
+    var d = document.getElementById('__bundler_err') || p.appendChild(document.createElement('div'));
+    d.id = '__bundler_err';
+    d.style.cssText = 'position:fixed;bottom:12px;left:12px;right:12px;font:12px/1.4 ui-monospace,monospace;background:#2a1215;color:#ff8a80;padding:10px 14px;border-radius:8px;border:1px solid #5c2b2e;z-index:99999;white-space:pre-wrap;max-height:40vh;overflow:auto';
+    d.textContent = (d.textContent ? d.textContent + String.fromCharCode(10) : '') +
+      '[bundle] ' + (e.message || e.type) +
+      (e.filename ? ' (' + e.filename.slice(0, 60) + ':' + e.lineno + ')' : '');
+  }, true);
+
+  try {
+    const manifestEl = document.querySelector('script[type="__bundler/manifest"]');
+    const templateEl = document.querySelector('script[type="__bundler/template"]');
+    if (!manifestEl || !templateEl) {
+      setStatus('Error: missing bundle data');
+      console.error('[bundler] Missing script tags — manifestEl:', !!manifestEl, 'templateEl:', !!templateEl);
+      return;
+    }
+
+    const manifest = JSON.parse(manifestEl.textContent);
+    let template = JSON.parse(templateEl.textContent);
+
+    const uuids = Object.keys(manifest);
+    setStatus('Unpacking ' + uuids.length + ' assets...');
+
+    const blobUrls = {};
+    await Promise.all(uuids.map(async (uuid) => {
+      const entry = manifest[uuid];
+      try {
+        const binaryStr = atob(entry.data);
+        const bytes = new Uint8Array(binaryStr.length);
+        for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
+
+        let finalBytes = bytes;
+        if (entry.compressed) {
+          if (typeof DecompressionStream !== 'undefined') {
+            const ds = new DecompressionStream('gzip');
+            const writer = ds.writable.getWriter();
+            const reader = ds.readable.getReader();
+            writer.write(bytes);
+            writer.close();
+            const chunks = [];
+            let totalLen = 0;
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              chunks.push(value);
+              totalLen += value.length;
+            }
+            finalBytes = new Uint8Array(totalLen);
+            let offset = 0;
+            for (const chunk of chunks) { finalBytes.set(chunk, offset); offset += chunk.length; }
+          } else {
+            console.warn('DecompressionStream not available, asset ' + uuid + ' may not render');
+          }
+        }
+
+        blobUrls[uuid] = URL.createObjectURL(new Blob([finalBytes], { type: entry.mime }));
+      } catch (err) {
+        console.error('Failed to decode asset ' + uuid + ':', err);
+        blobUrls[uuid] = URL.createObjectURL(new Blob([], { type: entry.mime }));
+      }
+    }));
+
+    const extResEl = document.querySelector('script[type="__bundler/ext_resources"]');
+    const extResources = extResEl ? JSON.parse(extResEl.textContent) : [];
+    const resourceMap = {};
+    for (const entry of extResources) {
+      if (blobUrls[entry.uuid]) resourceMap[entry.id] = blobUrls[entry.uuid];
+    }
+
+    setStatus('Rendering...');
+    for (const uuid of uuids) template = template.split(uuid).join(blobUrls[uuid]);
+
+    // Strip integrity + crossorigin — blob URLs from a file:// document inherit
+    // a null origin, so crossorigin forces a CORS fetch that SRI then rejects.
+    // The manifest bytes are ours; SRI protects against CDN compromise, not this.
+    template = template.replace(/\s+integrity="[^"]*"/gi, '').replace(/\s+crossorigin="[^"]*"/gi, '');
+
+    const resourceScript = '<script>window.__resources = ' +
+      JSON.stringify(resourceMap).split('</' + 'script>').join('<\\/' + 'script>') +
+      ';</' + 'script>';
+    // Inject after <head> so the DOCTYPE stays first; prepending the script
+    // would push the parser into quirks mode. DOMParser always emits a <head>
+    // (synthesizing one if the source HTML omitted it) but may carry
+    // attributes through, so match the full opening tag. slice() rather than
+    // replace() keeps us clear of $-pattern substitution in resourceScript.
+    const headOpen = template.match(/<head[^>]*>/i);
+    if (headOpen) {
+      const i = headOpen.index + headOpen[0].length;
+      template = template.slice(0, i) + resourceScript + template.slice(i);
+    }
+
+    // Parse the template and swap the root element. Scripts inserted via
+    // DOMParser/replaceWith are inert per spec — re-create each with
+    // createElement so they execute, awaiting onload for src scripts to
+    // preserve ordering (React before ReactDOM before Babel before text/babel).
+    const doc = new DOMParser().parseFromString(template, 'text/html');
+    document.documentElement.replaceWith(doc.documentElement);
+    const dead = Array.from(document.scripts);
+    for (const old of dead) {
+      const s = document.createElement('script');
+      for (const a of old.attributes) s.setAttribute(a.name, a.value);
+      s.textContent = old.textContent;
+      // text/babel scripts with a src: fetch and inline. transformScriptTags
+      // does XHR against the src, but blob:null/ from a file:// origin is
+      // silently dropped. Inlining makes it a plain inline babel script,
+      // which transformScriptTags handles unconditionally.
+      if ((s.type === 'text/babel' || s.type === 'text/jsx') && s.src) {
+        const r = await fetch(s.src);
+        s.textContent = await r.text();
+        s.removeAttribute('src');
+      }
+      const p = s.src ? new Promise(function(r) { s.onload = s.onerror = r; }) : null;
+      old.replaceWith(s);
+      if (p) await p;
+    }
+    // Babel standalone auto-transforms type=text/babel on DOMContentLoaded,
+    // which fired before we swapped the document. Trigger manually if present.
+    if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
+      window.Babel.transformScriptTags();
+    }
+  } catch (err) {
+    setStatus('Error unpacking: ' + err.message);
+    console.error('Bundle unpack error:', err);
+  }
+});
+
+  </script>
+
+  <script type="__bundler/manifest">
+{}
+  </script>
+
+  <script type="__bundler/ext_resources">
+[]
+  </script>
+
+  <script type="__bundler/template">
+"<!DOCTYPE html>\n<html lang=\"en\"><head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Projects · Robot Bobby<\u002Ftitle>\n<style>\n  :root {\n    --bg:        #0b0b0c;\n    --bg-2:      #111113;\n    --surface:   #141416;\n    --surface-2: #1a1a1d;\n    --line:      #232327;\n    --line-2:    #2e2e34;\n    --ink-3:     #8a8a92;\n    --ink-2:     #b8b8c0;\n    --ink-1:     #e8e8eb;\n    --ink-0:     #ffffff;\n    --mono: ui-monospace, \"SF Mono\", \"JetBrains Mono\", Menlo, Consolas, monospace;\n    --sans: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, Arial, sans-serif;\n  }\n\n  * { box-sizing: border-box; }\n  html, body { margin: 0; padding: 0; }\n  body {\n    background: var(--bg);\n    color: var(--ink-1);\n    font-family: var(--sans);\n    font-size: 15px;\n    line-height: 1.55;\n    -webkit-font-smoothing: antialiased;\n    text-rendering: optimizeLegibility;\n  }\n\n  a { color: inherit; text-decoration: none; }\n\n  /* ───── Layout shell ───── */\n  .shell {\n    max-width: 1480px;\n    margin: 0 auto;\n    padding: 0 40px;\n  }\n\n  /* ───── Top bar ───── */\n  .topbar {\n    border-bottom: 1px solid var(--line);\n    background: var(--bg);\n    position: sticky;\n    top: 0;\n    z-index: 10;\n    backdrop-filter: blur(8px);\n  }\n  .topbar-inner {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    height: 56px;\n  }\n  .brand {\n    display: flex;\n    align-items: center;\n    gap: 12px;\n  }\n  .brand-mark {\n    width: 22px;\n    height: 22px;\n    border-radius: 5px;\n    background: var(--ink-0);\n    color: var(--bg);\n    display: grid;\n    place-items: center;\n    font-family: var(--mono);\n    font-size: 11px;\n    font-weight: 700;\n    letter-spacing: -0.02em;\n  }\n  .brand-name {\n    font-weight: 600;\n    font-size: 14px;\n    color: var(--ink-0);\n    letter-spacing: -0.005em;\n  }\n  .brand-sep {\n    color: var(--ink-3);\n    font-family: var(--mono);\n    font-size: 12px;\n    margin: 0 2px;\n  }\n  .brand-section {\n    color: var(--ink-1);\n    font-size: 14px;\n  }\n\n  .nav {\n    display: flex;\n    align-items: center;\n    gap: 4px;\n  }\n  .nav-link {\n    color: var(--ink-1);\n    font-size: 14px;\n    padding: 7px 10px;\n    border-radius: 6px;\n    transition: color .15s, background .15s;\n  }\n  .nav-link:hover { color: var(--ink-0); background: var(--surface); }\n  .nav-divider {\n    width: 1px;\n    height: 18px;\n    background: var(--line);\n    margin: 0 8px;\n  }\n  .nav-cross {\n    color: var(--ink-0);\n    font-size: 14px;\n    padding: 7px 12px;\n    border: 1px solid var(--line-2);\n    border-radius: 6px;\n    display: inline-flex;\n    align-items: center;\n    gap: 8px;\n    transition: border-color .15s, color .15s;\n  }\n  .nav-cross:hover { border-color: var(--line-2); color: var(--ink-0); }\n  .nav-cross .arrow { color: var(--ink-3); transition: transform .15s; }\n  .nav-cross:hover .arrow { transform: translateX(2px); color: var(--ink-1); }\n\n  .theme-toggle {\n    width: 32px;\n    height: 32px;\n    border: 1px solid var(--line);\n    border-radius: 6px;\n    background: transparent;\n    color: var(--ink-2);\n    cursor: pointer;\n    display: grid;\n    place-items: center;\n    margin-left: 8px;\n  }\n  .theme-toggle:hover { color: var(--ink-0); border-color: var(--line-2); }\n\n  /* ───── Eyebrow band ───── */\n  .eyebrow-band {\n    padding: 28px 0 22px;\n    border-bottom: 1px solid var(--line);\n  }\n  .eyebrow {\n    font-family: var(--mono);\n    font-size: 12px;\n    letter-spacing: 0.14em;\n    text-transform: uppercase;\n    color: var(--ink-2);\n    margin: 0;\n  }\n\n  /* ───── Controls bar ───── */\n  .controls {\n    display: flex;\n    align-items: center;\n    gap: 12px;\n    padding: 20px 0;\n    border-bottom: 1px solid var(--line);\n    position: sticky;\n    top: 56px;\n    background: rgba(11,11,12,.92);\n    backdrop-filter: blur(8px);\n    z-index: 9;\n  }\n  .search {\n    position: relative;\n    flex: 1;\n    max-width: 480px;\n  }\n  .search input {\n    width: 100%;\n    background: var(--surface);\n    border: 1px solid var(--line);\n    border-radius: 8px;\n    height: 40px;\n    padding: 0 12px 0 38px;\n    color: var(--ink-0);\n    font-family: var(--sans);\n    font-size: 14px;\n    outline: none;\n  }\n  .search input::placeholder { color: var(--ink-3); }\n  .search input:focus { border-color: var(--line-2); background: var(--surface-2); }\n  .search-icon {\n    position: absolute;\n    left: 12px;\n    top: 50%;\n    transform: translateY(-50%);\n    color: var(--ink-3);\n    pointer-events: none;\n  }\n  .search-kbd {\n    position: absolute;\n    right: 8px;\n    top: 50%;\n    transform: translateY(-50%);\n    font-family: var(--mono);\n    font-size: 10px;\n    color: var(--ink-3);\n    border: 1px solid var(--line);\n    border-radius: 4px;\n    padding: 2px 5px;\n    background: var(--bg);\n  }\n\n  .select {\n    position: relative;\n    height: 40px;\n  }\n  .select select {\n    appearance: none;\n    -webkit-appearance: none;\n    background: var(--surface);\n    border: 1px solid var(--line);\n    border-radius: 8px;\n    color: var(--ink-1);\n    font-family: var(--sans);\n    font-size: 14px;\n    height: 40px;\n    padding: 0 36px 0 14px;\n    cursor: pointer;\n    min-width: 180px;\n  }\n  .select::after {\n    content: \"\";\n    position: absolute;\n    right: 14px;\n    top: 50%;\n    width: 7px;\n    height: 7px;\n    border-right: 1.5px solid var(--ink-2);\n    border-bottom: 1.5px solid var(--ink-2);\n    transform: translateY(-70%) rotate(45deg);\n    pointer-events: none;\n  }\n\n  .controls-spacer { flex: 1; }\n\n  .count {\n    font-family: var(--mono);\n    font-size: 12px;\n    color: var(--ink-2);\n    letter-spacing: 0.04em;\n    text-transform: uppercase;\n  }\n  .count b { color: var(--ink-0); font-weight: 500; }\n\n  /* ───── Category pills (active state, optional) ───── */\n  .cat-strip {\n    display: flex;\n    gap: 6px;\n    padding: 16px 0 24px;\n    overflow-x: auto;\n    border-bottom: 1px solid var(--line);\n  }\n  .cat-pill {\n    font-family: var(--mono);\n    font-size: 12px;\n    text-transform: lowercase;\n    letter-spacing: 0.02em;\n    color: var(--ink-2);\n    padding: 7px 12px;\n    border: 1px solid var(--line);\n    border-radius: 999px;\n    cursor: pointer;\n    white-space: nowrap;\n    background: transparent;\n    transition: border-color .15s, color .15s, background .15s;\n  }\n  .cat-pill:hover { color: var(--ink-0); border-color: var(--line-2); }\n  .cat-pill.active {\n    background: var(--ink-0);\n    color: var(--bg);\n    border-color: var(--ink-0);\n  }\n  .cat-pill .n {\n    color: var(--ink-3);\n    margin-left: 6px;\n  }\n  .cat-pill.active .n { color: var(--bg); opacity: .5; }\n\n  /* ───── Grid ───── */\n  .grid {\n    column-count: 4;\n    column-gap: 24px;\n    padding: 32px 0 80px;\n  }\n  @media (max-width: 1280px) { .grid { column-count: 3; } }\n  @media (max-width: 880px)  { .grid { column-count: 2; } }\n  @media (max-width: 560px)  { .grid { column-count: 1; } }\n\n  .card {\n    break-inside: avoid;\n    margin-bottom: 28px;\n    display: block;\n    cursor: pointer;\n  }\n\n  .thumb {\n    position: relative;\n    width: 100%;\n    background: var(--surface);\n    border: 1px solid var(--line);\n    border-radius: 10px;\n    overflow: hidden;\n    transition: border-color .18s, transform .18s;\n  }\n  .card:hover .thumb { border-color: var(--line-2); }\n  .card:hover .title { color: var(--ink-0); }\n\n  /* striped placeholder for thumbnail — represents the real image */\n  .ph {\n    width: 100%;\n    display: block;\n    background-image:\n      repeating-linear-gradient(\n        135deg,\n        rgba(255,255,255,0.022) 0 12px,\n        rgba(255,255,255,0)    12px 24px\n      );\n    background-color: var(--surface);\n  }\n  .ph-label {\n    position: absolute;\n    left: 12px;\n    bottom: 12px;\n    font-family: var(--mono);\n    font-size: 11px;\n    color: var(--ink-2);\n    letter-spacing: 0.02em;\n    background: rgba(11,11,12,0.65);\n    border: 1px solid var(--line-2);\n    padding: 3px 7px;\n    border-radius: 4px;\n    backdrop-filter: blur(4px);\n  }\n\n  .yt-badge {\n    display: inline-flex;\n    align-items: center;\n    gap: 6px;\n    height: 26px;\n    padding: 0 11px 0 9px;\n    border-radius: 999px;\n    background: transparent;\n    border: 1px solid var(--line-2);\n    color: var(--ink-1);\n    font-family: var(--mono);\n    font-size: 11px;\n    letter-spacing: 0.04em;\n    text-transform: uppercase;\n    margin-top: 10px;\n    align-self: flex-start;\n    cursor: pointer;\n    transition: background .15s, color .15s, border-color .15s;\n  }\n  .yt-badge:hover {\n    background: var(--ink-0);\n    color: var(--bg);\n    border-color: var(--ink-0);\n  }\n  .yt-badge svg { display: block; }\n\n  .meta {\n    padding: 14px 2px 0;\n    display: flex;\n    align-items: flex-start;\n    justify-content: space-between;\n    gap: 12px;\n  }\n  .meta-l {\n    min-width: 0;\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n  }\n  .title {\n    font-size: 15px;\n    font-weight: 500;\n    color: var(--ink-0);\n    line-height: 1.35;\n    margin: 0 0 6px;\n    letter-spacing: -0.005em;\n    transition: color .15s;\n  }\n  .sub {\n    display: flex;\n    align-items: center;\n    gap: 8px;\n    font-family: var(--mono);\n    font-size: 11.5px;\n    color: var(--ink-2);\n    letter-spacing: 0.03em;\n    text-transform: uppercase;\n  }\n  .sub .dot {\n    width: 2px;\n    height: 2px;\n    background: var(--ink-2);\n    border-radius: 50%;\n  }\n  .sub .cat { color: var(--ink-1); }\n\n  .ext {\n    color: var(--ink-3);\n    flex-shrink: 0;\n    margin-top: 2px;\n    transition: color .15s, transform .15s;\n  }\n  .card:hover .ext { color: var(--ink-1); transform: translate(2px,-2px); }\n\n  /* ───── Infinite scroll sentinel ───── */\n  .scroll-status {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    gap: 14px;\n    padding: 32px 0 100px;\n    border-top: 1px solid var(--line);\n  }\n  .scroll-status .note {\n    font-family: var(--mono);\n    font-size: 12px;\n    color: var(--ink-2);\n    letter-spacing: 0.04em;\n    text-transform: uppercase;\n  }\n  .scroll-status .spinner {\n    display: inline-block;\n    width: 14px;\n    height: 14px;\n    border: 1.5px solid var(--line-2);\n    border-top-color: var(--ink-0);\n    border-radius: 50%;\n    animation: spin .8s linear infinite;\n  }\n  .scroll-status.is-done .spinner { display: none; }\n  @keyframes spin { to { transform: rotate(360deg); } }\n\n  /* ───── Footer ───── */\n  .footer {\n    border-top: 1px solid var(--line);\n    padding: 40px 0 60px;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    color: var(--ink-2);\n    font-family: var(--mono);\n    font-size: 12px;\n    letter-spacing: 0.04em;\n    text-transform: uppercase;\n  }\n  .footer a { color: var(--ink-2); }\n  .footer a:hover { color: var(--ink-0); }\n  .footer-r { display: flex; gap: 24px; }\n<\u002Fstyle>\n<\u002Fhead>\n<body>\n\n\n\n<header class=\"topbar\">\n  <div class=\"shell topbar-inner\">\n    <div class=\"brand\">\n      <div class=\"brand-mark\">rb<\u002Fdiv>\n      <span class=\"brand-name\">Robot Bobby<\u002Fspan>\n      <span class=\"brand-sep\">/<\u002Fspan>\n      <span class=\"brand-section\">Projects<\u002Fspan>\n    <\u002Fdiv>\n    <nav class=\"nav\">\n      <a class=\"nav-link\" href=\"#\">YouTube<\u002Fa>\n      <a class=\"nav-link\" href=\"#\">GitHub<\u002Fa>\n      <a class=\"nav-link\" href=\"#\">CodePen<\u002Fa>\n      <span class=\"nav-divider\"><\u002Fspan>\n      <a class=\"nav-cross\" href=\"#\">Experiments Gallery <span class=\"arrow\">→<\u002Fspan><\u002Fa>\n      <button class=\"theme-toggle\" aria-label=\"Toggle theme\">\n        <svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z\"><\u002Fpath><\u002Fsvg>\n      <\u002Fbutton>\n    <\u002Fnav>\n  <\u002Fdiv>\n<\u002Fheader>\n\n<section class=\"eyebrow-band shell\">\n  <p class=\"eyebrow\">Tutorial Companions · 2023 – 2026<\u002Fp>\n<\u002Fsection>\n\n<div class=\"shell\">\n\n  <div class=\"controls\">\n    <div class=\"search\">\n      <span class=\"search-icon\">\n        <svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"11\" cy=\"11\" r=\"7\"><\u002Fcircle><path d=\"m20 20-3.5-3.5\"><\u002Fpath><\u002Fsvg>\n      <\u002Fspan>\n      <input type=\"text\" placeholder=\"Search title, description, tags…\">\n      <span class=\"search-kbd\">⌘K<\u002Fspan>\n    <\u002Fdiv>\n    <div class=\"select\">\n      <select>\n        <option>All categories<\u002Foption>\n        <option>shaders<\u002Foption>\n        <option>particles<\u002Foption>\n        <option>physics<\u002Foption>\n        <option>geometry<\u002Foption>\n        <option>webgpu<\u002Foption>\n        <option>animation<\u002Foption>\n        <option>art<\u002Foption>\n        <option>getting-started<\u002Foption>\n        <option>post-processing<\u002Foption>\n        <option>other<\u002Foption>\n      <\u002Fselect>\n    <\u002Fdiv>\n    <div class=\"controls-spacer\"><\u002Fdiv>\n    <div class=\"count\"><b>72<\u002Fb> projects<\u002Fdiv>\n  <\u002Fdiv>\n\n  <div class=\"cat-strip\">\n    <button class=\"cat-pill active\">all <span class=\"n\">72<\u002Fspan><\u002Fbutton>\n    <button class=\"cat-pill\">webgpu <span class=\"n\">14<\u002Fspan><\u002Fbutton>\n    <button class=\"cat-pill\">shaders <span class=\"n\">12<\u002Fspan><\u002Fbutton>\n    <button class=\"cat-pill\">particles <span class=\"n\">9<\u002Fspan><\u002Fbutton>\n    <button class=\"cat-pill\">geometry <span class=\"n\">8<\u002Fspan><\u002Fbutton>\n    <button class=\"cat-pill\">physics <span class=\"n\">7<\u002Fspan><\u002Fbutton>\n    <button class=\"cat-pill\">animation <span class=\"n\">6<\u002Fspan><\u002Fbutton>\n    <button class=\"cat-pill\">post-processing <span class=\"n\">6<\u002Fspan><\u002Fbutton>\n    <button class=\"cat-pill\">art <span class=\"n\">5<\u002Fspan><\u002Fbutton>\n    <button class=\"cat-pill\">getting-started <span class=\"n\">3<\u002Fspan><\u002Fbutton>\n    <button class=\"cat-pill\">other <span class=\"n\">2<\u002Fspan><\u002Fbutton>\n  <\u002Fdiv>\n\n  <main class=\"grid\" id=\"grid\"><\u002Fmain>\n\n  <div class=\"scroll-status\" id=\"scroll-status\">\n    <span class=\"spinner\" aria-hidden=\"true\"><\u002Fspan>\n    <div class=\"note\" id=\"scroll-note\">Loading more…<\u002Fdiv>\n  <\u002Fdiv>\n\n  <footer class=\"footer\">\n    <div>© 2026 Robot Bobby<\u002Fdiv>\n    <div class=\"footer-r\">\n      <a href=\"#\">Source on GitHub<\u002Fa>\n      <a href=\"#\">RSS<\u002Fa>\n      <a href=\"#\">Colophon<\u002Fa>\n    <\u002Fdiv>\n  <\u002Ffooter>\n\n<\u002Fdiv>\n\n<script>\n  // Project data — placeholders represent real thumbnails\n  const projects = [\n    { slug: \"3D-cubiverse\",        title: \"3D Glowing Cubiverse\",         cat: \"webgpu\",          date: \"2024-06-01\", h: 280, yt: true  },\n    { slug: \"fluid-sim\",           title: \"GPU Fluid Simulation\",         cat: \"shaders\",         date: \"2024-05-18\", h: 200, yt: true  },\n    { slug: \"ascii-tunnel\",        title: \"ASCII Tunnel Renderer\",        cat: \"post-processing\", date: \"2024-05-04\", h: 240, yt: true  },\n    { slug: \"point-cloud-portrait\",title: \"Point Cloud Portraits\",        cat: \"particles\",       date: \"2024-04-22\", h: 320, yt: true  },\n    { slug: \"wave-mesh\",           title: \"Wave Mesh Terrain\",            cat: \"geometry\",        date: \"2024-04-11\", h: 180, yt: true  },\n    { slug: \"metaballs-wgpu\",      title: \"WebGPU Metaballs\",             cat: \"webgpu\",          date: \"2024-03-29\", h: 260, yt: true  },\n    { slug: \"type-flow-field\",     title: \"Typography Flow Field\",        cat: \"art\",             date: \"2024-03-15\", h: 220, yt: true  },\n    { slug: \"boids-gpu\",           title: \"Boids on the GPU\",             cat: \"particles\",       date: \"2024-03-02\", h: 300, yt: true  },\n    { slug: \"raymarch-primitives\", title: \"Ray-Marched Primitives\",       cat: \"shaders\",         date: \"2024-02-20\", h: 200, yt: true  },\n    { slug: \"instanced-grass\",     title: \"Instanced Wind Grass\",         cat: \"geometry\",        date: \"2024-02-08\", h: 240, yt: true  },\n    { slug: \"cloth-sim-verlet\",    title: \"Verlet Cloth Simulation\",      cat: \"physics\",         date: \"2024-01-25\", h: 280, yt: true  },\n    { slug: \"sdf-garden\",          title: \"Signed Distance Garden\",       cat: \"shaders\",         date: \"2024-01-12\", h: 220, yt: false },\n    { slug: \"particle-flow\",       title: \"Curl Noise Particle Flow\",     cat: \"particles\",       date: \"2023-12-30\", h: 320, yt: true  },\n    { slug: \"voronoi-noise\",       title: \"Voronoi Noise Studies\",        cat: \"art\",             date: \"2023-12-15\", h: 200, yt: true  },\n    { slug: \"shader-fog\",          title: \"Volumetric Shader Fog\",        cat: \"post-processing\", date: \"2023-12-01\", h: 240, yt: true  },\n    { slug: \"orbital-mechanics\",   title: \"Orbital Mechanics Sandbox\",    cat: \"physics\",         date: \"2023-11-18\", h: 260, yt: true  },\n    { slug: \"refracted-caustics\",  title: \"Refracted Caustics\",           cat: \"shaders\",         date: \"2023-11-04\", h: 200, yt: true  },\n    { slug: \"reaction-diffusion\",  title: \"Reaction-Diffusion Patterns\",  cat: \"shaders\",         date: \"2023-10-22\", h: 280, yt: true  },\n    { slug: \"mesh-morph\",          title: \"Mesh Morphing Pipeline\",       cat: \"geometry\",        date: \"2023-10-09\", h: 220, yt: true  },\n    { slug: \"wireframe-city\",      title: \"Wireframe City Flythrough\",    cat: \"animation\",       date: \"2023-09-28\", h: 300, yt: true  },\n    { slug: \"feedback-loop\",       title: \"Feedback Loop Painter\",        cat: \"art\",             date: \"2023-09-14\", h: 200, yt: true  },\n    { slug: \"hello-three\",         title: \"Hello, three.js\",              cat: \"getting-started\", date: \"2023-09-01\", h: 240, yt: true  },\n    { slug: \"noise-field-walker\",  title: \"Noise Field Walker\",           cat: \"particles\",       date: \"2023-08-20\", h: 220, yt: true  },\n    { slug: \"anaglyph-render\",     title: \"Anaglyph 3D Renderer\",         cat: \"post-processing\", date: \"2023-08-06\", h: 260, yt: false },\n  ];\n\n  function fmtDate(s) {\n    const d = new Date(s + \"T00:00:00\");\n    return d.toLocaleDateString(\"en-US\", { year: \"numeric\", month: \"short\" });\n  }\n\n  const grid = document.getElementById(\"grid\");\n  const status = document.getElementById(\"scroll-status\");\n  const note = document.getElementById(\"scroll-note\");\n\n  // Simulate 72-project catalog by cycling the seed set\n  const TOTAL = 72;\n  const all = Array.from({ length: TOTAL }, (_, i) => {\n    const seed = projects[i % projects.length];\n    return { ...seed, _i: i, h: seed.h + ((i * 37) % 4) * 10 - 20 };\n  });\n\n  const PAGE = 24;\n  let shown = 0;\n\n  function cardHTML(p) {\n    return `\n    <a class=\"card\" href=\"#\" target=\"_blank\" rel=\"noopener\">\n      <div class=\"thumb\">\n        <div class=\"ph\" style=\"height:${p.h}px\"><\u002Fdiv>\n        <span class=\"ph-label\">${p.slug}.png<\u002Fspan>\n      <\u002Fdiv>\n      <div class=\"meta\">\n        <div class=\"meta-l\">\n          <h3 class=\"title\">${p.title}<\u002Fh3>\n          <div class=\"sub\">\n            <span class=\"cat\">${p.cat}<\u002Fspan>\n            <span class=\"dot\"><\u002Fspan>\n            <span>${fmtDate(p.date)}<\u002Fspan>\n          <\u002Fdiv>\n          ${p.yt ? `\n          <span class=\"yt-badge\" onclick=\"event.preventDefault();event.stopPropagation();\">\n            <svg width=\"11\" height=\"11\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M8 5v14l11-7z\"/><\u002Fsvg>\n            Watch on YouTube\n          <\u002Fspan>` : ``}\n        <\u002Fdiv>\n        <span class=\"ext\" aria-hidden=\"true\">\n          <svg width=\"13\" height=\"13\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M7 17 17 7\"/><path d=\"M8 7h9v9\"/><\u002Fsvg>\n        <\u002Fspan>\n      <\u002Fdiv>\n    <\u002Fa>`;\n  }\n\n  function appendPage() {\n    const next = all.slice(shown, shown + PAGE);\n    if (!next.length) return;\n    grid.insertAdjacentHTML(\"beforeend\", next.map(cardHTML).join(\"\"));\n    shown += next.length;\n    if (shown >= all.length) {\n      status.style.display = \"none\";\n      io.disconnect();\n    }\n  }\n\n  // Initial page\n  appendPage();\n\n  // Infinite scroll — trigger ~400px before the sentinel hits the viewport\n  const io = new IntersectionObserver((entries) => {\n    for (const e of entries) {\n      if (e.isIntersecting) appendPage();\n    }\n  }, { rootMargin: \"400px 0px\" });\n  io.observe(status);\n<\u002Fscript>\n\n\n\n<\u002Fbody><\u002Fhtml>"
+  </script>
+</body>
+</html>
