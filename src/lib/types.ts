@@ -3,6 +3,7 @@ export interface Project {
   slug: string;
   description: string;
   youtubeUrl: string;
+  repoUrl: string;
   link: string;
   media: string;
   createdAt: string;
