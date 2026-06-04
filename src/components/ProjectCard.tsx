@@ -24,7 +24,6 @@ export function ProjectCard({ project }: Props) {
     e.stopPropagation();
     window.open(project.repoUrl, '_blank', 'noopener,noreferrer');
   }
-
   return (
     <a
       className="card"
@@ -35,7 +34,7 @@ export function ProjectCard({ project }: Props) {
       <div className="thumb">
         {project.media && !imgFailed ? (
           <img
-            src={project.media.startsWith('http') ? project.media : `/media/${project.media}`}
+            src={project.media.startsWith('http') ? project.media : `${import.meta.env.BASE_URL}media/${project.media}`}
             alt={project.title}
             loading="lazy"
             onError={() => setImgFailed(true)}

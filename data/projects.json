@@ -21,7 +21,7 @@
     "youtubeUrl": "https://youtu.be/rmNMltWCdjQ",
     "repoUrl": "https://github.com/bobbyroe/interactive-exploding-model",
     "link": "https://bobbyroe.github.io/interactive-exploding-model/",
-    "media": "https://raw.githubusercontent.com/bobbyroe/interactive-exploding-model/main/rad-grad.png",
+    "media": "exploding-model.png",
     "createdAt": "2026-05-10",
     "category": "animation",
     "tags": [
@@ -254,7 +254,7 @@
     "youtubeUrl": "https://youtu.be/w2ljEVh3i5w",
     "repoUrl": "https://github.com/bobbyroe/curl-particles",
     "link": "https://bobbyroe.github.io/curl-particles/",
-    "media": "curl-particles.png",
+    "media": "https://raw.githubusercontent.com/bobbyroe/curl-particles/refs/heads/main/screenshot.jpg",
     "createdAt": "2025-11-30",
     "category": "particles",
     "tags": [
@@ -664,7 +664,7 @@
     "youtubeUrl": "https://youtu.be/b78_tqkBuLM",
     "repoUrl": "https://github.com/bobbyroe/getting-started-threejs",
     "link": "https://bobbyroe.github.io/getting-started-threejs/",
-    "media": "https://raw.githubusercontent.com/bobbyroe/getting-started-threejs/start/rad-grad.png",
+    "media": "getting-started-threejs.png",
     "createdAt": "2025-04-21",
     "category": "getting-started",
     "tags": [
@@ -680,7 +680,7 @@
     "youtubeUrl": "https://youtu.be/w_ku0HjutZI",
     "repoUrl": "https://github.com/bobbyroe/flythru-wireframe-wormhole",
     "link": "https://bobbyroe.github.io/flythru-wireframe-wormhole/",
-    "media": "https://raw.githubusercontent.com/bobbyroe/flythru-wireframe-wormhole/main/circle.png",
+    "media": "flythru-wireframe-wormhole.png",
     "createdAt": "2025-04-07",
     "category": "other",
     "tags": [
@@ -1062,7 +1062,7 @@
     "youtubeUrl": "https://www.youtube.com/watch?v=1kxmeeUSCh8",
     "repoUrl": "https://github.com/bobbyroe/mandala-maker",
     "link": "https://bobbyroe.github.io/mandala-maker/",
-    "media": "https://raw.githubusercontent.com/bobbyroe/mandala-maker/main/black-n-shiney2.jpg",
+    "media": "mandala-maker.png",
     "createdAt": "2024-03-21",
     "category": "art",
     "tags": [
