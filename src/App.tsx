@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
-import { allProjects, filterProjects, PAGE_SIZE } from './lib/dataLoader';
+import { allProjects, filterProjects, sortProjects, PAGE_SIZE } from './lib/dataLoader';
+import type { SortKey } from './lib/dataLoader';
 import { Header } from './components/Header';
 import { Controls } from './components/Controls';
 import { CategoryStrip } from './components/CategoryStrip';
@@ -10,6 +11,7 @@ export default function App() {
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [category, setCategory] = useState('all');
+  const [sort, setSort] = useState<SortKey>('date');
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -20,7 +22,7 @@ export default function App() {
 
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
-  }, [debouncedSearch, category]);
+  }, [debouncedSearch, category, sort]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -34,8 +36,8 @@ export default function App() {
   }, []);
 
   const filtered = useMemo(
-    () => filterProjects(allProjects, debouncedSearch, category),
-    [debouncedSearch, category]
+    () => sortProjects(filterProjects(allProjects, debouncedSearch, category), sort),
+    [debouncedSearch, category, sort]
   );
 
   const visible = filtered.slice(0, visibleCount);
@@ -63,6 +65,8 @@ export default function App() {
           onSearch={setSearch}
           category={category}
           onCategory={handleCategory}
+          sort={sort}
+          onSort={setSort}
           count={filtered.length}
           searchRef={searchRef}
         />

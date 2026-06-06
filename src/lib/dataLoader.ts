@@ -15,6 +15,16 @@ export const categoryCounts: Record<string, number> = Object.fromEntries(
   categories.map((cat) => [cat, allProjects.filter((p) => p.category === cat).length])
 );
 
+export type SortKey = 'date' | 'title' | 'category';
+
+export function sortProjects(projects: Project[], sort: SortKey): Project[] {
+  return projects.slice().sort((a, b) => {
+    if (sort === 'title')    return a.title.localeCompare(b.title);
+    if (sort === 'category') return a.category.localeCompare(b.category) || a.title.localeCompare(b.title);
+    return a.createdAt < b.createdAt ? 1 : -1;
+  });
+}
+
 export function filterProjects(
   projects: Project[],
   search: string,

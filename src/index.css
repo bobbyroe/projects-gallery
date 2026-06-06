@@ -257,6 +257,12 @@ button { font-family: inherit; }
   width: 100%;
   object-fit: cover;
   display: block;
+  transition: transform .35s ease, filter .35s ease;
+}
+.card:hover .thumb img,
+.card:hover .thumb video {
+  transform: scale(1.04);
+  filter: brightness(1.08);
 }
 .ph {
   width: 100%;

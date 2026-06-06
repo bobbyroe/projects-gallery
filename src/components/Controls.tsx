@@ -1,16 +1,19 @@
 import type { RefObject } from 'react';
 import { categories } from '../lib/dataLoader';
+import type { SortKey } from '../lib/dataLoader';
 
 interface Props {
   search: string;
   onSearch: (v: string) => void;
   category: string;
   onCategory: (v: string) => void;
+  sort: SortKey;
+  onSort: (v: SortKey) => void;
   count: number;
   searchRef: RefObject<HTMLInputElement | null>;
 }
 
-export function Controls({ search, onSearch, category, onCategory, count, searchRef }: Props) {
+export function Controls({ search, onSearch, category, onCategory, sort, onSort, count, searchRef }: Props) {
   return (
     <div className="controls">
       <div className="search">
@@ -40,6 +43,18 @@ export function Controls({ search, onSearch, category, onCategory, count, search
           {categories.map((cat) => (
             <option key={cat} value={cat}>{cat}</option>
           ))}
+        </select>
+      </div>
+
+      <div className="select">
+        <select
+          value={sort}
+          onChange={(e) => onSort(e.target.value as SortKey)}
+          aria-label="Sort projects"
+        >
+          <option value="date">Newest first</option>
+          <option value="title">Title A–Z</option>
+          <option value="category">Category A–Z</option>
         </select>
       </div>
 
