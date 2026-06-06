@@ -1,6 +1,13 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import type { Project } from '../lib/types';
 import { fmtDate } from '../lib/dataLoader';
+
+const HEIGHTS = [180, 210, 240, 270, 300];
+function thumbHeight(slug: string): number {
+  let h = 0;
+  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
+  return HEIGHTS[h % HEIGHTS.length];
+}
 
 interface Props {
   project: Project;
@@ -10,8 +17,15 @@ const INVALID_YT = new Set(['', 'xxx']);
 
 export function ProjectCard({ project }: Props) {
   const [imgFailed, setImgFailed] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const hasYt = project.youtubeUrl && !INVALID_YT.has(project.youtubeUrl);
   const hasRepo = Boolean(project.repoUrl);
+  const hasVideo = Boolean(project.videoSrc);
+  const height = thumbHeight(project.slug);
+
+  function resolveSrc(src: string) {
+    return src.startsWith('http') ? src : `${import.meta.env.BASE_URL}media/${src}`;
+  }
 
   function openYt(e: React.MouseEvent) {
     e.preventDefault();
@@ -24,6 +38,18 @@ export function ProjectCard({ project }: Props) {
     e.stopPropagation();
     window.open(project.repoUrl, '_blank', 'noopener,noreferrer');
   }
+
+  function handleMouseEnter() {
+    videoRef.current?.play().catch(() => {});
+  }
+
+  function handleMouseLeave() {
+    const v = videoRef.current;
+    if (!v) return;
+    v.pause();
+    v.currentTime = 0;
+  }
+
   return (
     <a
       className="card"
@@ -31,16 +57,32 @@ export function ProjectCard({ project }: Props) {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <div className="thumb">
-        {project.media && !imgFailed ? (
+      <div
+        className="thumb"
+        onMouseEnter={hasVideo ? handleMouseEnter : undefined}
+        onMouseLeave={hasVideo ? handleMouseLeave : undefined}
+      >
+        {hasVideo ? (
+          <video
+            ref={videoRef}
+            src={resolveSrc(project.videoSrc!)}
+            poster={project.media && !imgFailed ? resolveSrc(project.media) : undefined}
+            muted
+            loop
+            playsInline
+            preload="none"
+            style={{ height }}
+          />
+        ) : project.media && !imgFailed ? (
           <img
-            src={project.media.startsWith('http') ? project.media : `${import.meta.env.BASE_URL}media/${project.media}`}
+            src={resolveSrc(project.media)}
             alt={project.title}
             loading="lazy"
             onError={() => setImgFailed(true)}
+            style={{ height }}
           />
         ) : (
-          <div className="ph" />
+          <div className="ph" style={{ height }} />
         )}
       </div>
 

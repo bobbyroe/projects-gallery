@@ -6,6 +6,7 @@ export interface Project {
   repoUrl: string;
   link: string;
   media: string;
+  videoSrc?: string;
   createdAt: string;
   category: string;
   tags: string[];

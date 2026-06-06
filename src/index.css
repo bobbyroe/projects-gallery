@@ -69,12 +69,13 @@ button { font-family: inherit; }
 .brand-mark {
   width: 22px; height: 22px;
   border-radius: 5px;
-  background: var(--ink-0);
-  color: var(--bg);
-  display: grid; place-items: center;
-  font-family: var(--mono);
-  font-size: 11px; font-weight: 700;
-  letter-spacing: -0.02em;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.brand-mark img {
+  width: 100%; height: 100%;
+  display: block;
+  object-fit: cover;
 }
 .brand-name  { font-weight: 600; font-size: 14px; color: var(--ink-0); letter-spacing: -0.005em; }
 .brand-sep   { color: var(--ink-3); font-family: var(--mono); font-size: 12px; margin: 0 2px; }
@@ -251,15 +252,14 @@ button { font-family: inherit; }
 .card:hover .thumb  { border-color: var(--line-2); }
 .card:hover .title  { color: var(--ink-0); }
 
-.thumb img {
+.thumb img,
+.thumb video {
   width: 100%;
-  aspect-ratio: 16 / 9;
   object-fit: cover;
   display: block;
 }
 .ph {
   width: 100%;
-  aspect-ratio: 16 / 9;
   display: block;
   background-image: repeating-linear-gradient(
     135deg,

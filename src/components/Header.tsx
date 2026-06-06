@@ -5,7 +5,9 @@ export function Header() {
     <header className="topbar">
       <div className="shell topbar-inner">
         <div className="brand">
-          <div className="brand-mark">rb</div>
+          <div className="brand-mark">
+            <img src={`${import.meta.env.BASE_URL}robotbobby-logo-128.png`} alt="Robot Bobby" width="22" height="22" />
+          </div>
           <span className="brand-name">Robot Bobby</span>
           <span className="brand-sep">/</span>
           <span className="brand-section">Projects</span>
